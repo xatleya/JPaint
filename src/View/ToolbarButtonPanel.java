@@ -11,7 +11,18 @@ public class ToolbarButtonPanel extends JPanel{
         this.setLayout(new GridLayout(5,1,4,4));
         this.setPreferredSize(new Dimension(100,530));
         this.setBorder(BorderFactory.createLineBorder(Color.black));
-        JButton selectButton = new JButton("select");
-        this.add(selectButton);
+        
+        //create Button
+        ToolbarButton selectShapeButton =new ToolbarButton(1);
+        ToolbarButton fillShapeButton =new ToolbarButton(2);
+        ToolbarButton drawOvalButton =new ToolbarButton(3);
+        ToolbarButton drawLineButton =new ToolbarButton(4);
+        ToolbarButton drawRectangleButton =new ToolbarButton(5);
+        //add button
+        this.add(selectShapeButton);
+        this.add(fillShapeButton);
+        this.add(drawOvalButton);
+        this.add(drawLineButton);
+        this.add(drawRectangleButton);
     }
 }
