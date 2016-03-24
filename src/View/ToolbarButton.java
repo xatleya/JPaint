@@ -9,18 +9,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.text.Utilities;
 
-/**
- *
- * @author Ronpiche
- */
 public class ToolbarButton extends JButton{
-
     private int buttonNumber;
             
     public ToolbarButton(int buttonNumber){
-        super();
         this.buttonNumber = buttonNumber;
-        //size
+
         this.setPreferredSize(new Dimension(150, 100));
         this.setMinimumSize(this.getPreferredSize());
         this.setMaximumSize(this.getPreferredSize());

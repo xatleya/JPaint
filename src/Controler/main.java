@@ -8,6 +8,5 @@ public class main {
         MainModele modele = new MainModele();
         MainFrame frame = new MainFrame();
         modele.addObserver(frame.getDrawPanel());
-    }
-    
+    }  
 }

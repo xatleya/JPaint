@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame{
     private DrawPanel drawPanel;
-    private StatusPanel statusPanel;
+    private StatusPanel statusPanel = new StatusPanel(this);
     
     public MainFrame() {
         super("JPaint");
@@ -22,12 +22,10 @@ public class MainFrame extends JFrame{
         this.drawPanel = drawPanel;
         this.add(panelUnderDrawPanel);
         
-        Toolbar toolbar = new Toolbar(drawPanel);
+        Toolbar toolbar = new Toolbar(statusPanel);
         Container contentPane = this.getContentPane();
         contentPane.add(toolbar, BorderLayout.WEST);
         
-        StatusPanel statusPanel = new StatusPanel(this);
-        this.statusPanel = statusPanel;
         this.add(statusPanel, BorderLayout.SOUTH);
         
         this.setVisible(true);
@@ -35,7 +33,7 @@ public class MainFrame extends JFrame{
         this.setMinimumSize(this.getSize());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        this.addComponentListener(new ComponentAdapter() {
+        /*this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 ToolbarButtonPanel toolbarButtonPanel = toolbar.getToolbarButtonPanel();
                 toolbarButtonPanel.setSize(new Dimension(toolbarButtonPanel.getWidth(),toolbarButtonPanel.getHeight()+getHeight()));
@@ -43,7 +41,7 @@ public class MainFrame extends JFrame{
                 repaint();
                 //System.out.println("componentResized");
             }
-        });
+        });*/
     }
 
     public DrawPanel getDrawPanel() {

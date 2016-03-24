@@ -9,7 +9,10 @@ public class ButtonListenerColorChoser implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         JButton button = (JButton)ae.getSource();
-        Color color = JColorChooser.showDialog(null, "Choose a color", Color.yellow);
+        Color color = JColorChooser.showDialog(null, "Choose a color", button.getBackground());
+        if(color == null) {
+            color = button.getBackground();
+        }
         button.setBackground(color);
     }
     
