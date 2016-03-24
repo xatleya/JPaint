@@ -33,9 +33,11 @@ public class DrawPanel extends JPanel implements Observer{
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
         for(MyShape current : this.modele.getShapesTab()) {
-            g2d.setPaint(current.getBackgroundColor());
-            g2d.fill(current.getShapeBackground());          
-            g2d.draw(current.getShapeBackground());
+            if(current.getShapeBackground() != null) {
+                g2d.setPaint(current.getBackgroundColor());
+                g2d.fill(current.getShapeBackground());          
+                g2d.draw(current.getShapeBackground());
+            }
             
             g2d.setPaint(current.getForegroundColor());
             g2d.fill(current.getShapeForeground());

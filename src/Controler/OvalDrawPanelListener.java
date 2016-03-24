@@ -15,7 +15,7 @@ public class OvalDrawPanelListener implements MouseListener{
     
     @Override
     public void mouseClicked(MouseEvent me) {
-        System.out.println("je dessine un oval");
+        
     }
 
     @Override
