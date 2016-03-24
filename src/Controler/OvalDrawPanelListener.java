@@ -1,7 +1,7 @@
 package Controler;
 
 import Modele.MainModele;
-import Modele.Oval;
+import Modele.MyShape;
 import View.DrawPanel;
 import java.awt.Color;
 import java.awt.Shape;
@@ -27,9 +27,12 @@ public class OvalDrawPanelListener implements MouseListener{
     @Override
     public void mouseReleased(MouseEvent me) {
        DrawPanel drawPanel = (DrawPanel)me.getSource();
-       Shape shape = new Ellipse2D.Float(this.xOrigin,this.yOrigin,me.getX()-this.xOrigin,me.getY()-this.yOrigin);
-       Oval oval = new Oval(shape, Color.red, Color.BLUE);
-       drawPanel.getModele().getShapesTab().add(oval);
+       Shape shapeBackground = new Ellipse2D.Float(this.xOrigin,this.yOrigin,me.getX()-this.xOrigin,me.getY()-this.yOrigin);
+       Shape shapeForeground = new Ellipse2D.Float(this.xOrigin+2,this.yOrigin+2,me.getX()-this.xOrigin-4,me.getY()-this.yOrigin-4);
+       Color backgroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getBackgroundButton().getBackground();
+       Color foregroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getForegroundButton().getBackground();
+       MyShape ellipse = new MyShape(shapeForeground, shapeBackground, foregroundColor, backgroundColor);
+       drawPanel.getModele().getShapesTab().add(ellipse);
        drawPanel.getModele().notifyObserver();
     }
 

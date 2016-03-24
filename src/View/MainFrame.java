@@ -12,13 +12,14 @@ import javax.swing.JPanel;
 public class MainFrame extends JFrame{
     private DrawPanel drawPanel;
     private StatusPanel statusPanel = new StatusPanel(this);
+    private Toolbar toolbar;
     
     public MainFrame(MainModele modele) {
         super("JPaint");
         
         JPanel panelUnderDrawPanel = new JPanel();
         panelUnderDrawPanel.setLayout(new BorderLayout(5,5));
-        DrawPanel drawPanel = new DrawPanel(modele);
+        DrawPanel drawPanel = new DrawPanel(modele, this);
         panelUnderDrawPanel.add(drawPanel, BorderLayout.CENTER);
         this.drawPanel = drawPanel;
         this.add(panelUnderDrawPanel);
@@ -26,6 +27,7 @@ public class MainFrame extends JFrame{
         Toolbar toolbar = new Toolbar(statusPanel, drawPanel);
         Container contentPane = this.getContentPane();
         contentPane.add(toolbar, BorderLayout.WEST);
+        this.toolbar = toolbar;
         
         this.add(statusPanel, BorderLayout.SOUTH);
         
@@ -47,5 +49,9 @@ public class MainFrame extends JFrame{
 
     public DrawPanel getDrawPanel() {
         return drawPanel;
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 }
