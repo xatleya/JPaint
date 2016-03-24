@@ -10,22 +10,33 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 public class Toolbar extends JToolBar{
-    public Toolbar() {
+    private DrawPanel drawPanel;
+    private ToolbarButtonPanel toolbarButtonPanel;
+    private ToolbarColorChoserPanel toolbarColorChoserPanel;
+    
+    
+    public Toolbar(DrawPanel drawPanel) {
         super(null, JToolBar.VERTICAL);
+        this.drawPanel = drawPanel;
         this.setPreferredSize(new Dimension(150,600));
         this.setRollover(true);
         this.setLayout(new BorderLayout(5,5));
         
-        ToolbarButtonPanel toolbarButtonPanel = new ToolbarButtonPanel();
+        ToolbarButtonPanel toolbarButtonPanel = new ToolbarButtonPanel(this.drawPanel);
+        this.toolbarButtonPanel = toolbarButtonPanel;
         this.add(toolbarButtonPanel, BorderLayout.NORTH);
-        
-        /*JSeparator separator = new Toolbar.Separator();
-        separator.setOrientation(SwingConstants.VERTICAL);
-        this.add(separator);*/
         this.addSeparator(new Dimension(20,20));
         
         ToolbarColorChoserPanel toolbarColorChoserPanel = new ToolbarColorChoserPanel();
-        this.add(toolbarColorChoserPanel, BorderLayout.SOUTH);
-        
+        this.toolbarColorChoserPanel = toolbarColorChoserPanel;
+        this.add(toolbarColorChoserPanel, BorderLayout.SOUTH);        
     } 
+
+    public ToolbarButtonPanel getToolbarButtonPanel() {
+        return toolbarButtonPanel;
+    }
+
+    public ToolbarColorChoserPanel getToolbarColorChoserPanel() {
+        return toolbarColorChoserPanel;
+    }
 }
