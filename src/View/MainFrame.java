@@ -22,14 +22,14 @@ public class MainFrame extends JFrame{
         this.drawPanel = drawPanel;
         this.add(panelUnderDrawPanel);
         
-        Toolbar toolbar = new Toolbar(statusPanel);
+        Toolbar toolbar = new Toolbar(statusPanel, drawPanel);
         Container contentPane = this.getContentPane();
         contentPane.add(toolbar, BorderLayout.WEST);
         
         this.add(statusPanel, BorderLayout.SOUTH);
         
         this.setVisible(true);
-        this.setSize(550,650);
+        this.setSize(800,650);
         this.setMinimumSize(this.getSize());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         

@@ -14,13 +14,13 @@ public class Toolbar extends JToolBar{
     private ToolbarColorChoserPanel toolbarColorChoserPanel;
     
     
-    public Toolbar(StatusPanel statusPanel) {
+    public Toolbar(StatusPanel statusPanel, DrawPanel drawPanel) {
         super(null, JToolBar.VERTICAL);
         this.setPreferredSize(new Dimension(150,600));
         this.setRollover(true);
         this.setLayout(new BorderLayout(5,5));
         
-        ToolbarButtonPanel toolbarButtonPanel = new ToolbarButtonPanel(statusPanel);
+        ToolbarButtonPanel toolbarButtonPanel = new ToolbarButtonPanel(statusPanel, drawPanel);
         this.toolbarButtonPanel = toolbarButtonPanel;
         this.add(toolbarButtonPanel, BorderLayout.NORTH);
         this.addSeparator(new Dimension(20,20));
