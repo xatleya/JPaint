@@ -6,7 +6,7 @@ public class main {
 
     public static void main(String[] args) {
         MainModele modele = new MainModele();
-        MainFrame frame = new MainFrame();
+        MainFrame frame = new MainFrame(modele);
         modele.addObserver(frame.getDrawPanel());
     }  
 }

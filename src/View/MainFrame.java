@@ -1,5 +1,6 @@
 package View;
 
+import Modele.MainModele;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -12,12 +13,12 @@ public class MainFrame extends JFrame{
     private DrawPanel drawPanel;
     private StatusPanel statusPanel = new StatusPanel(this);
     
-    public MainFrame() {
+    public MainFrame(MainModele modele) {
         super("JPaint");
         
         JPanel panelUnderDrawPanel = new JPanel();
         panelUnderDrawPanel.setLayout(new BorderLayout(5,5));
-        DrawPanel drawPanel = new DrawPanel();
+        DrawPanel drawPanel = new DrawPanel(modele);
         panelUnderDrawPanel.add(drawPanel, BorderLayout.CENTER);
         this.drawPanel = drawPanel;
         this.add(panelUnderDrawPanel);

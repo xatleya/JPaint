@@ -2,21 +2,22 @@ package Modele;
 import Observe.Observable;
 import Observe.Observer;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.util.ArrayList;
 
 public class MainModele implements Observable{
-    private ArrayList<Graphics2D> shapesTab = new ArrayList<Graphics2D>();
+    private ArrayList<MyShape> shapesTab = new ArrayList<MyShape>();
     private ArrayList<Observer> listObserver = new ArrayList<Observer>();
     
     public MainModele() {
         
     }
 
-    public ArrayList<Graphics2D> getShapesTab() {
+    public ArrayList<MyShape> getShapesTab() {
         return shapesTab;
     }
 
-    public void setShapesTab(ArrayList<Graphics2D> shapesTab) {
+    public void setShapesTab(ArrayList<MyShape> shapesTab) {
         this.shapesTab = shapesTab;
     }
 
