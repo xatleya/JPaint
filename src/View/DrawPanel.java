@@ -25,21 +25,40 @@ public class DrawPanel extends JPanel implements Observer{
         this.setLayout(null);
         this.setBackground(Color.white);
         this.setBorder(BorderFactory.createLineBorder(Color.black));
-        this.addMouseListener(new SelectDrawPanelListener());  //par default mode select
+        //this.addMouseListener(new SelectDrawPanelListener());  //par default mode select
     }
     
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
+        
+        //ajout des panels de nos shapes
+        this.removeAll();
+        int i = this.modele.getShapesTab().size()-1;
+        while(i!=-1) {
+            MyShape current = this.modele.getShapesTab().get(i);
+            this.add(current);
+            this.remove(this);
+            i--;
+        }
+        
+        //ajout de nos shapes
         for(MyShape current : this.modele.getShapesTab()) {
             if(current.getShapeBackground() != null) {
                 g2d.setPaint(current.getBackgroundColor());
-                g2d.fill(current.getShapeBackground());          
+                g2d.fill(current.getShapeBackground()); 
                 g2d.draw(current.getShapeBackground());
             }
             
-            g2d.setPaint(current.getForegroundColor());
+            if(current.isSelected()) {
+                Color selectedColor = current.getForegroundColor();
+                selectedColor = selectedColor.brighter();
+                g2d.setPaint(current.getForegroundColor().darker());
+            }
+            else {
+                g2d.setPaint(current.getForegroundColor());
+            }
             g2d.fill(current.getShapeForeground());
             g2d.draw(current.getShapeForeground());
         }
@@ -55,6 +74,7 @@ public class DrawPanel extends JPanel implements Observer{
 
     @Override
     public void update() {
+        this.revalidate();
         this.repaint();
     }
 }

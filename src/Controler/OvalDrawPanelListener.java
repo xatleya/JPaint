@@ -50,7 +50,7 @@ public class OvalDrawPanelListener implements MouseListener{
        }
        Color backgroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getBackgroundButton().getBackground();
        Color foregroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getForegroundButton().getBackground();
-       MyShape ellipse = new MyShape(shapeForeground, shapeBackground, foregroundColor, backgroundColor);
+       MyShape ellipse = new MyShape(drawPanel.getModele(), shapeForeground, shapeBackground, foregroundColor, backgroundColor);
        drawPanel.getModele().getShapesTab().add(ellipse);
        drawPanel.getModele().notifyObserver();
     }

@@ -1,5 +1,6 @@
 package Controler;
 
+import Modele.MyShape;
 import View.DrawPanel;
 import View.StatusPanel;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 
 public class ToolbarButtonListener implements ActionListener {
     private String status;
@@ -26,8 +28,26 @@ public class ToolbarButtonListener implements ActionListener {
             this.drawPanel.removeMouseListener(current);
         }
         try {
-            Class classListener = Class.forName("Controler." + status + "DrawPanelListener");
-            this.drawPanel.addMouseListener((MouseListener) classListener.newInstance());
+            for(MyShape current : this.drawPanel.getModele().getShapesTab()) {
+                JPanel panel = (JPanel)current;
+                for(MouseListener ml : panel.getMouseListeners()) {
+                    panel.removeMouseListener(ml);
+                }
+                current.setSelected(false);
+            }
+            this.drawPanel.getModele().notifyObserver();
+            
+            if(status == "Select") {
+                for(MyShape current : this.drawPanel.getModele().getShapesTab()) {
+                    JPanel panel = (JPanel)current;
+                    Class classListener = Class.forName("Controler." + status + "DrawPanelListener");
+                    panel.addMouseListener((MouseListener) classListener.newInstance());
+                }
+            }
+            else {
+                Class classListener = Class.forName("Controler." + status + "DrawPanelListener");
+                this.drawPanel.addMouseListener((MouseListener) classListener.newInstance());
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ToolbarButtonListener.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
