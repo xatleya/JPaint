@@ -50,7 +50,7 @@ public class RectangleDrawPanelListener implements MouseListener{
        }
        Color backgroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getBackgroundButton().getBackground();
        Color foregroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getForegroundButton().getBackground();
-       MyShape rectangle = new MyShape(drawPanel.getModele(), shapeForeground, shapeBackground, foregroundColor, backgroundColor);
+       MyShape rectangle = new MyShape(drawPanel.getModele(), shapeForeground, shapeBackground, foregroundColor, backgroundColor, new String("Rectangle"));
        drawPanel.getModele().getShapesTab().add(rectangle);
        drawPanel.getModele().notifyObserver();
     }

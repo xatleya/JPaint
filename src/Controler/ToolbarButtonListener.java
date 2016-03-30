@@ -5,7 +5,9 @@ import View.DrawPanel;
 import View.StatusPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -33,8 +35,12 @@ public class ToolbarButtonListener implements ActionListener {
                 for(MouseListener ml : panel.getMouseListeners()) {
                     panel.removeMouseListener(ml);
                 }
+                for(MouseMotionListener mml : panel.getMouseMotionListeners()) {
+                    panel.removeMouseMotionListener(mml);
+                }
                 current.setSelected(false);
             }
+            
             this.drawPanel.getModele().notifyObserver();
             
             if(status == "Select") {
@@ -42,6 +48,8 @@ public class ToolbarButtonListener implements ActionListener {
                     JPanel panel = (JPanel)current;
                     Class classListener = Class.forName("Controler." + status + "DrawPanelListener");
                     panel.addMouseListener((MouseListener) classListener.newInstance());
+                    panel.addMouseMotionListener((MouseMotionListener) classListener.newInstance());
+                    //panel.addKeyListener((KeyListener) classListener.newInstance());
                 }
             }
             else {

@@ -13,17 +13,23 @@ public class MyShape extends JPanel{
     private Shape shapeForeground;
     private Color foregroundColor;
     private Color backgroundColor;
+    private String type;
     private boolean selected = false;
     
-    public MyShape(MainModele modele, Shape shapeForeground, Shape shapeBackground, Color foregroundColor, Color backgroundColor) {
+    private int xOrigin;
+    private int yOrigin;
+    
+    public MyShape(MainModele modele, Shape shapeForeground, Shape shapeBackground, Color foregroundColor, Color backgroundColor, String type) {
         this.modele = modele;
         this.shapeForeground = shapeForeground;
         this.shapeBackground = shapeBackground;
         this.foregroundColor = foregroundColor;
         this.backgroundColor = backgroundColor;
-        //this.setBorder(BorderFactory.createLineBorder(Color.black));
-        this.setBounds((int)this.shapeBackground.getBounds2D().getX(), (int)this.shapeBackground.getBounds2D().getY(), (int)this.shapeBackground.getBounds2D().getWidth(), (int)this.shapeBackground.getBounds2D().getHeight());
+        this.type = type;
+        this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.setBackground(new Color(0,0,0,0));
+        this.xOrigin = (int)this.shapeForeground.getBounds2D().getX();
+        this.yOrigin = (int)this.shapeForeground.getBounds2D().getY();
     }
 
     public Color getForegroundColor() {
@@ -52,5 +58,33 @@ public class MyShape extends JPanel{
 
     public MainModele getModele() {
         return modele;
+    }
+
+    public void setShapeBackground(Shape shapeBackground) {
+        this.shapeBackground = shapeBackground;
+    }
+
+    public void setShapeForeground(Shape shapeForeground) {
+        this.shapeForeground = shapeForeground;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getxOrigin() {
+        return xOrigin;
+    }
+
+    public int getyOrigin() {
+        return yOrigin;
+    }
+
+    public void setxOrigin(int xOrigin) {
+        this.xOrigin = xOrigin;
+    }
+
+    public void setyOrigin(int yOrigin) {
+        this.yOrigin = yOrigin;
     }
 }

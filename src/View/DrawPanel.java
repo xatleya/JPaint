@@ -7,6 +7,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
@@ -34,12 +35,37 @@ public class DrawPanel extends JPanel implements Observer{
         Graphics2D g2d = (Graphics2D)g;
         
         //ajout des panels de nos shapes
-        this.removeAll();
+        //this.removeAll();
         int i = this.modele.getShapesTab().size()-1;
         while(i!=-1) {
             MyShape current = this.modele.getShapesTab().get(i);
-            this.add(current);
-            this.remove(this);
+            if(current.getType().equals("Ellipse") || current.getType().equals("Rectangle")) {
+                if(current.isSelected()) {
+                    current.setLocation(new Point(current.getxOrigin(), current.getyOrigin()));
+                }
+                else {
+                    this.remove(current);
+                    //current.setBorder(null);
+                    current.setBounds(current.getxOrigin(), current.getyOrigin(), (int)current.getShapeForeground().getBounds2D().getWidth(), (int)current.getShapeForeground().getBounds2D().getHeight());
+                    this.add(current);
+                }
+            }
+            i--;
+        }
+        
+        i=this.modele.getShapesTab().size()-1;
+        while(i!=-1) {
+            MyShape current = this.modele.getShapesTab().get(i);
+            if(current.getType().equals("Line")) {
+                if(current.isSelected()) {
+                    current.setLocation(new Point(current.getxOrigin(), current.getyOrigin()));
+                }
+                else {
+                    //current.setBorder(null);
+                    current.setBounds(current.getxOrigin(), current.getyOrigin(), (int)current.getShapeForeground().getBounds2D().getWidth(), (int)current.getShapeForeground().getBounds2D().getHeight());
+                    this.add(current);
+                }
+            }
             i--;
         }
         

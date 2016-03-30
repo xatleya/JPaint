@@ -28,7 +28,7 @@ public class LineDrawPanelListener implements MouseListener{
        DrawPanel drawPanel = (DrawPanel)me.getSource();
        Shape shapeForeground = new Line2D.Float(this.xOrigin,this.yOrigin,me.getX(),me.getY());
        Color foregroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getForegroundButton().getBackground();
-       MyShape line = new MyShape(drawPanel.getModele(), shapeForeground, null, foregroundColor, null);
+       MyShape line = new MyShape(drawPanel.getModele(), shapeForeground, null, foregroundColor, null, new String("Line"));
        drawPanel.getModele().getShapesTab().add(line);
        drawPanel.getModele().notifyObserver();
     }
