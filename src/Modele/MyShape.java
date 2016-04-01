@@ -68,6 +68,14 @@ public class MyShape extends JPanel{
         this.shapeForeground = shapeForeground;
     }
 
+    public void setForegroundColor(Color foregroundColor) {
+        this.foregroundColor = foregroundColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
     public String getType() {
         return type;
     }

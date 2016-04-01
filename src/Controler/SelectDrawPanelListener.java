@@ -71,7 +71,9 @@ public class SelectDrawPanelListener implements MouseListener, MouseMotionListen
         }
         else if(myShape.getType().equalsIgnoreCase("Line")){
             shapeBackground = null;
-            shapeForeground = new Line2D.Float(x,y,(int)myShape.getShapeForeground().getBounds2D().getWidth()-4,(int)myShape.getShapeForeground().getBounds2D().getHeight()-4);
+            int w = (int)myShape.getShapeForeground().getBounds2D().getWidth();
+            int h = (int)myShape.getShapeForeground().getBounds2D().getHeight();
+            shapeForeground = new Line2D.Float(x,y,w,h);
         }
         else {
             shapeBackground = null;

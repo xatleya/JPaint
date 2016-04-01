@@ -35,7 +35,6 @@ public class DrawPanel extends JPanel implements Observer{
         Graphics2D g2d = (Graphics2D)g;
         
         //ajout des panels de nos shapes
-        //this.removeAll();
         int i = this.modele.getShapesTab().size()-1;
         while(i!=-1) {
             MyShape current = this.modele.getShapesTab().get(i);

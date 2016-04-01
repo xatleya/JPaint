@@ -3,6 +3,7 @@ package Controler;
 import Modele.MyShape;
 import View.DrawPanel;
 import View.StatusPanel;
+import View.ToolbarColorChoserPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
@@ -50,6 +51,13 @@ public class ToolbarButtonListener implements ActionListener {
                     panel.addMouseListener((MouseListener) classListener.newInstance());
                     panel.addMouseMotionListener((MouseMotionListener) classListener.newInstance());
                     //panel.addKeyListener((KeyListener) classListener.newInstance());
+                }
+            }
+            else if(status == "Fill") {
+                for(MyShape current : this.drawPanel.getModele().getShapesTab()) {
+                    JPanel panel = (JPanel)current;
+                    ToolbarColorChoserPanel toolbarColorChoserPanel = this.drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel();
+                    panel.addMouseListener(new FillDrawPanelListener(toolbarColorChoserPanel));
                 }
             }
             else {
