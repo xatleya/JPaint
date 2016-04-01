@@ -34,19 +34,19 @@ public class RectangleDrawPanelListener implements MouseListener{
        
        if(xEnd < this.xOrigin && yEnd < this.yOrigin) {
            shapeBackground = new Rectangle2D.Float(xEnd,yEnd,this.xOrigin-xEnd,this.yOrigin-yEnd);
-           shapeForeground = new Rectangle2D.Float(xEnd+2,yEnd+2,this.xOrigin-xEnd-4,this.yOrigin-yEnd-4);
+           shapeForeground = new Rectangle2D.Float(xEnd+4,yEnd+4,this.xOrigin-xEnd-8,this.yOrigin-yEnd-8);
        }
        else if(yEnd < this.yOrigin) {
            shapeBackground = new Rectangle2D.Float(this.xOrigin,yEnd,xEnd-this.xOrigin,this.yOrigin-yEnd);
-           shapeForeground = new Rectangle2D.Float(this.xOrigin+2,yEnd+2,xEnd-this.xOrigin-4,this.yOrigin-yEnd-4);
+           shapeForeground = new Rectangle2D.Float(this.xOrigin+4,yEnd+4,xEnd-this.xOrigin-8,this.yOrigin-yEnd-8);
        }
        else if(xEnd < this.xOrigin) {
            shapeBackground = new Rectangle2D.Float(xEnd,this.yOrigin,this.xOrigin-xEnd,yEnd-this.yOrigin);
-           shapeForeground = new Rectangle2D.Float(xEnd+2,this.yOrigin+2,this.xOrigin-xEnd-4,yEnd-this.yOrigin-4);
+           shapeForeground = new Rectangle2D.Float(xEnd+4,this.yOrigin+4,this.xOrigin-xEnd-8,yEnd-this.yOrigin-8);
        }
        else{
            shapeBackground = new Rectangle2D.Float(this.xOrigin,this.yOrigin,me.getX()-this.xOrigin,me.getY()-this.yOrigin);
-           shapeForeground = new Rectangle2D.Float(this.xOrigin+2,this.yOrigin+2,me.getX()-this.xOrigin-4,me.getY()-this.yOrigin-4);
+           shapeForeground = new Rectangle2D.Float(this.xOrigin+4,this.yOrigin+4,me.getX()-this.xOrigin-8,me.getY()-this.yOrigin-8);
        }
        Color backgroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getBackgroundButton().getBackground();
        Color foregroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getForegroundButton().getBackground();

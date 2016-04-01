@@ -10,10 +10,15 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 
 public class DrawPanel extends JPanel implements Observer{
@@ -27,6 +32,21 @@ public class DrawPanel extends JPanel implements Observer{
         this.setBackground(Color.white);
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         //this.addMouseListener(new SelectDrawPanelListener());  //par default mode select
+        
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "delete");
+        this.getActionMap().put("delete", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                ArrayList<MyShape> shapesTab = modele.getShapesTab();
+                for(int i=0;i<=shapesTab.size()-1;i++) {
+                    if(shapesTab.get(i).isSelected()) {
+                        remove(shapesTab.get(i));
+                        modele.getShapesTab().remove(i);
+                    }
+                }
+                modele.notifyObserver();
+            }    
+        });
     }
     
     @Override
@@ -40,6 +60,7 @@ public class DrawPanel extends JPanel implements Observer{
             MyShape current = this.modele.getShapesTab().get(i);
             if(current.getType().equals("Ellipse") || current.getType().equals("Rectangle")) {
                 if(current.isSelected()) {
+                    //current.setBorder(BorderFactory.createLineBorder(Color.black));
                     current.setLocation(new Point(current.getxOrigin(), current.getyOrigin()));
                 }
                 else {

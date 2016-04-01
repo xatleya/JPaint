@@ -31,9 +31,9 @@ public class SelectDrawPanelListener implements MouseListener, MouseMotionListen
         myShape.getModele().getShapesTab().remove(myShape);
         myShape.getModele().getShapesTab().add(myShape);
         myShape.getModele().notifyObserver();
-       this.xFirstClick = me.getX();
-       this.yFirstClick = me.getY();
-       System.out.println("x = " + this.xFirstClick + " y = " + this.yFirstClick);
+        this.xFirstClick = me.getX();
+        this.yFirstClick = me.getY();
+        System.out.println("x = " + this.xFirstClick + " y = " + this.yFirstClick);
     }
 
     @Override
@@ -70,10 +70,13 @@ public class SelectDrawPanelListener implements MouseListener, MouseMotionListen
             shapeForeground = new Rectangle2D.Float(x+2,y+2,(int)myShape.getShapeBackground().getBounds2D().getWidth()-4,(int)myShape.getShapeBackground().getBounds2D().getHeight()-4);
         }
         else if(myShape.getType().equalsIgnoreCase("Line")){
+            Line2D temp = (Line2D) myShape.getShapeForeground();
             shapeBackground = null;
-            int w = (int)myShape.getShapeForeground().getBounds2D().getWidth();
-            int h = (int)myShape.getShapeForeground().getBounds2D().getHeight();
-            shapeForeground = new Line2D.Float(x,y,w,h);
+            Double diffx =Math.abs(temp.getX1()-temp.getX2())/2;
+            Double diffy =Math.abs(temp.getY1()-temp.getY2())/2;
+            Double x2=x+diffx;
+            Double y2=y+diffy;
+            shapeForeground = new Line2D.Double(x2+diffx,y2+diffy,x2-diffx,y2-diffy);
         }
         else {
             shapeBackground = null;

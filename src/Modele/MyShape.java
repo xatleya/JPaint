@@ -26,7 +26,7 @@ public class MyShape extends JPanel{
         this.foregroundColor = foregroundColor;
         this.backgroundColor = backgroundColor;
         this.type = type;
-        this.setBorder(BorderFactory.createLineBorder(Color.black));
+        //this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.setBackground(new Color(0,0,0,0));
         this.xOrigin = (int)this.shapeForeground.getBounds2D().getX();
         this.yOrigin = (int)this.shapeForeground.getBounds2D().getY();

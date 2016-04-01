@@ -50,7 +50,6 @@ public class ToolbarButtonListener implements ActionListener {
                     Class classListener = Class.forName("Controler." + status + "DrawPanelListener");
                     panel.addMouseListener((MouseListener) classListener.newInstance());
                     panel.addMouseMotionListener((MouseMotionListener) classListener.newInstance());
-                    //panel.addKeyListener((KeyListener) classListener.newInstance());
                 }
             }
             else if(status == "Fill") {
