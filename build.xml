@@ -7,7 +7,7 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="Paint" default="default" basedir=".">
+<project name="Paint" default="compile" basedir=".">
     <description>Builds, tests, and runs the project Paint.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
@@ -70,4 +70,16 @@
     nbproject/build-impl.xml file. 
 
     -->
+	<target name="-post-compile">
+		<copy todir="./tools">
+			<fileset dir="${build.dir}/classes/Tools" includes="*"/>
+		</copy>
+	</target>
+	
+	<target name="-post-jar">
+		<copy todir="${dist.dir}/tools">
+			<fileset dir="${build.dir}/classes/Tools" includes="*"/>
+		</copy>
+	</target>
+
 </project>
