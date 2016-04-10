@@ -1,6 +1,5 @@
 package Controler;
 
-import Modele.MainModele;
 import Modele.MyShape;
 import View.DrawPanel;
 import java.awt.Color;

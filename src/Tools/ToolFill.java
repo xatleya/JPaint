@@ -1,31 +1,25 @@
 package Tools;
 
 import Controler.FillDrawPanelListener;
-import Controler.ToolbarButtonListener;
 import Modele.MyShape;
-import View.DrawPanel;
-import View.StatusPanel;
+import View.MainFrame;
 import View.ToolbarColorChoserPanel;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class ToolFill extends JButton implements Tool, ActionListener{
-    private StatusPanel statusPanel;
-    private DrawPanel drawPanel;
+public class ToolFill extends JButton implements ActionListener, MouseListener{
+    private MainFrame mainFrame;
     private String status;
     
-    public ToolFill(StatusPanel statusPanel, DrawPanel drawPanel) {
-        this.statusPanel = statusPanel;
-        this.drawPanel = drawPanel;
+    public ToolFill(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
         String toolType = this.getClass().getName();
         this.status = toolType.substring(10, toolType.length());
         
@@ -43,26 +37,39 @@ public class ToolFill extends JButton implements Tool, ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        this.statusPanel.setStatus(status);
-        for(MouseListener current : this.drawPanel.getMouseListeners()) {
-            this.drawPanel.removeMouseListener(current);
-        }
-        for(MyShape current : this.drawPanel.getModele().getShapesTab()) {
+        this.mainFrame.getStatusPanel().setStatus(status);
+        this.mainFrame.getDrawPanel().removeListeners();
+        this.mainFrame.getDrawPanel().getModele().notifyObserver();
+        for(MyShape current : this.mainFrame.getDrawPanel().getModele().getShapesTab()) {
             JPanel panel = (JPanel)current;
-            for(MouseListener ml : panel.getMouseListeners()) {
-                panel.removeMouseListener(ml);
-            }
-            for(MouseMotionListener mml : panel.getMouseMotionListeners()) {
-                panel.removeMouseMotionListener(mml);
-            }
-            current.setSelected(false);
-        }
-        this.drawPanel.getModele().notifyObserver();
-        for(MyShape current : this.drawPanel.getModele().getShapesTab()) {
-            JPanel panel = (JPanel)current;
-            ToolbarColorChoserPanel toolbarColorChoserPanel = this.drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel();
+            ToolbarColorChoserPanel toolbarColorChoserPanel = this.mainFrame.getDrawPanel().getMainFrame().getToolbar().getToolbarColorChoserPanel();
             panel.addMouseListener(new FillDrawPanelListener(toolbarColorChoserPanel));
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

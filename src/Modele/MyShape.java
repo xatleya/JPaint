@@ -1,10 +1,7 @@
 package Modele;
 
-import Controler.SelectDrawPanelListener;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Shape;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class MyShape extends JPanel{

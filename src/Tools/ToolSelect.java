@@ -1,11 +1,8 @@
 package Tools;
 
-import Controler.FillDrawPanelListener;
 import Controler.ToolbarButtonListener;
 import Modele.MyShape;
-import View.DrawPanel;
-import View.StatusPanel;
-import View.ToolbarColorChoserPanel;
+import View.MainFrame;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -19,13 +16,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class ToolSelect extends JButton implements ActionListener{
-    private StatusPanel statusPanel;
-    private DrawPanel drawPanel;
+    private MainFrame mainFrame;
     private String status;
     
-    public ToolSelect(StatusPanel statusPanel, DrawPanel drawPanel) {
-        this.statusPanel = statusPanel;
-        this.drawPanel = drawPanel;
+    public ToolSelect(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
         String toolType = this.getClass().getName();
         this.status = toolType.substring(10, toolType.length());
         
@@ -43,25 +38,12 @@ public class ToolSelect extends JButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        this.statusPanel.setStatus(status);
-        for(MouseListener current : this.drawPanel.getMouseListeners()) {
-            this.drawPanel.removeMouseListener(current);
-        }
+        this.mainFrame.getStatusPanel().setStatus(status);
         try {
-            for(MyShape current : this.drawPanel.getModele().getShapesTab()) {
-                JPanel panel = (JPanel)current;
-                for(MouseListener ml : panel.getMouseListeners()) {
-                    panel.removeMouseListener(ml);
-                }
-                for(MouseMotionListener mml : panel.getMouseMotionListeners()) {
-                    panel.removeMouseMotionListener(mml);
-                }
-                current.setSelected(false);
-            }
+            this.mainFrame.getDrawPanel().removeListeners(); 
+            this.mainFrame.getDrawPanel().getModele().notifyObserver();
             
-            this.drawPanel.getModele().notifyObserver();
-            
-            for(MyShape current : this.drawPanel.getModele().getShapesTab()) {
+            for(MyShape current : this.mainFrame.getDrawPanel().getModele().getShapesTab()) {
                 JPanel panel = (JPanel)current;
                 Class classListener = Class.forName("Controler." + status + "DrawPanelListener");
                 panel.addMouseListener((MouseListener) classListener.newInstance());

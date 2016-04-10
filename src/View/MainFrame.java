@@ -24,7 +24,7 @@ public class MainFrame extends JFrame{
         this.drawPanel = drawPanel;
         this.add(panelUnderDrawPanel);
         
-        Toolbar toolbar = new Toolbar(statusPanel, drawPanel);
+        Toolbar toolbar = new Toolbar(this);
         Container contentPane = this.getContentPane();
         contentPane.add(toolbar, BorderLayout.WEST);
         this.toolbar = toolbar;
@@ -32,7 +32,7 @@ public class MainFrame extends JFrame{
         this.add(statusPanel, BorderLayout.SOUTH);
         
         this.setVisible(true);
-        this.setSize(800,650);
+        this.setSize(900,700);
         this.setMinimumSize(this.getSize());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -53,5 +53,9 @@ public class MainFrame extends JFrame{
 
     public Toolbar getToolbar() {
         return toolbar;
+    }
+
+    public StatusPanel getStatusPanel() {
+        return statusPanel;
     }
 }

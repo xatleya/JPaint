@@ -1,25 +1,21 @@
 package View;
-import Controler.SelectDrawPanelListener;
 import Modele.MainModele;
 import Modele.MyShape;
 import Observe.Observer;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Shape;
-import java.awt.Stroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.geom.Rectangle2D;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-import javax.swing.border.Border;
 
 public class DrawPanel extends JPanel implements Observer{
     private MainModele modele;
@@ -116,6 +112,22 @@ public class DrawPanel extends JPanel implements Observer{
 
     public MainFrame getMainFrame() {
         return mainFrame;
+    }
+    
+    public void removeListeners() {
+        for(MouseListener current : this.getMouseListeners()) {
+            this.removeMouseListener(current);
+        }
+        for(MyShape current : this.getModele().getShapesTab()) {
+                JPanel panel = (JPanel)current;
+                for(MouseListener ml : panel.getMouseListeners()) {
+                    panel.removeMouseListener(ml);
+                }
+                for(MouseMotionListener mml : panel.getMouseMotionListeners()) {
+                    panel.removeMouseMotionListener(mml);
+                }
+                current.setSelected(false);
+            }
     }
 
     @Override

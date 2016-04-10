@@ -1,8 +1,6 @@
 package Modele;
 import Observe.Observable;
 import Observe.Observer;
-import java.awt.Graphics2D;
-import java.awt.Shape;
 import java.util.ArrayList;
 
 public class MainModele implements Observable{
