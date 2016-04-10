@@ -1,9 +1,9 @@
 package Tools;
 
-import Controler.FillDrawPanelListener;
 import Modele.MyShape;
 import View.MainFrame;
 import View.ToolbarColorChoserPanel;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -42,34 +42,39 @@ public class ToolFill extends JButton implements ActionListener, MouseListener{
         this.mainFrame.getDrawPanel().getModele().notifyObserver();
         for(MyShape current : this.mainFrame.getDrawPanel().getModele().getShapesTab()) {
             JPanel panel = (JPanel)current;
-            ToolbarColorChoserPanel toolbarColorChoserPanel = this.mainFrame.getDrawPanel().getMainFrame().getToolbar().getToolbarColorChoserPanel();
-            panel.addMouseListener(new FillDrawPanelListener(toolbarColorChoserPanel));
+            panel.addMouseListener(this);
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        MyShape myShape = (MyShape)me.getSource();
+        ToolbarColorChoserPanel toolbarColorChoserPanel = this.mainFrame.getToolbar().getToolbarColorChoserPanel();
+        Color newBackgroundColor = toolbarColorChoserPanel.getBackgroundButton().getBackground();
+        myShape.setBackgroundColor(newBackgroundColor);
+        Color newForegroundColor = toolbarColorChoserPanel.getForegroundButton().getBackground();
+        myShape.setForegroundColor(newForegroundColor);
+        myShape.getModele().notifyObserver();
     }
 
     @Override
     public void mousePressed(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void mouseReleased(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void mouseEntered(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     public void mouseExited(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }

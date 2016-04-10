@@ -58,6 +58,7 @@ public class DrawPanel extends JPanel implements Observer{
                 if(current.isSelected()) {
                     //current.setBorder(BorderFactory.createLineBorder(Color.black));
                     current.setLocation(new Point(current.getxOrigin(), current.getyOrigin()));
+                    current.setBackground(new Color(0,0,0,0));
                 }
                 else {
                     this.remove(current);
@@ -75,6 +76,7 @@ public class DrawPanel extends JPanel implements Observer{
             if(current.getType().equals("Line")) {
                 if(current.isSelected()) {
                     current.setLocation(new Point(current.getxOrigin(), current.getyOrigin()));
+                    current.setBackground(new Color(0,0,0,0));
                 }
                 else {
                     //current.setBorder(null);
