@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class CustomClassLoader extends ClassLoader {
-
     private static final String packagePath = "Tools.";
 
     public Class<?> defineClassFromFile(File file) throws IOException {

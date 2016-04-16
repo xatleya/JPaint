@@ -1,5 +1,7 @@
 package View;
 
+import Controler.Tool;
+import Controler.ToolException;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -47,19 +49,27 @@ public class ToolbarToolsPanel extends JPanel{
         try {
             toolClass = c.defineClassFromPath(file.toPath());
             Class s = Class.forName(toolClass.getName());
-            Constructor constr = s.getConstructor(new Class[]{MainFrame.class});
-            JButton tool = (JButton) createObject(constr, new Object[]{this.mainFrame});
-            this.add(tool);
+            if(Tool.class.isAssignableFrom(s)) {
+                Constructor constr = s.getConstructor(new Class[]{MainFrame.class});
+                JButton tool = (JButton) createObject(constr, new Object[]{this.mainFrame});
+                this.add(tool);
+            }
+            else {
+                throw new ToolException();
+            }
+        }
+        catch (ToolException ex) {
+            System.out.println(ex.getMessage());
         }
         catch (IOException ex) {
         } catch (IllegalArgumentException ex) {
-            Logger.getLogger(ToolbarToolsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         } catch (SecurityException ex) {
-            Logger.getLogger(ToolbarToolsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ToolbarToolsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         } catch (NoSuchMethodException ex) {
-            Logger.getLogger(ToolbarToolsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         System.out.println(toolClass.getName());
         this.mainFrame.revalidate();
@@ -83,11 +93,9 @@ public class ToolbarToolsPanel extends JPanel{
     }
     
     public static Object createObject(Constructor constructor, Object[] arg) {
-        System.out.println ("Constructor: " + constructor.toString());
         Object object = null;
         try {
             object = constructor.newInstance(arg);
-            System.out.println ("Object: " + object.toString());
             return object;
         } catch (InstantiationException e) {
             System.out.println(e);

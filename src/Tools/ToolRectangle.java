@@ -1,5 +1,6 @@
 package Tools;
 
+import Controler.Tool;
 import Modele.MyShape;
 import View.DrawPanel;
 import View.MainFrame;
@@ -15,7 +16,7 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class ToolRectangle extends JButton implements ActionListener, MouseListener{
+public class ToolRectangle extends JButton implements ActionListener, MouseListener, Tool{
     private MainFrame mainFrame;
     private String status;
     

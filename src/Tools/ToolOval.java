@@ -1,5 +1,6 @@
 package Tools;
 
+import Controler.Tool;
 import Modele.MyShape;
 import View.DrawPanel;
 import View.MainFrame;
@@ -12,12 +13,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class ToolOval extends JButton implements ActionListener, MouseListener{
+public class ToolOval extends JButton implements ActionListener, MouseListener, Tool{
     private MainFrame mainFrame;
     private String status;
     

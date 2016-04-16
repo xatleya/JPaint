@@ -1,5 +1,6 @@
 package Tools;
 
+import Controler.Tool;
 import Modele.MyShape;
 import View.MainFrame;
 import View.ToolbarColorChoserPanel;
@@ -14,7 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class ToolFill extends JButton implements ActionListener, MouseListener{
+public class ToolFill extends JButton implements ActionListener, MouseListener, Tool{
     private MainFrame mainFrame;
     private String status;
     
@@ -75,6 +76,5 @@ public class ToolFill extends JButton implements ActionListener, MouseListener{
     @Override
     public void mouseExited(MouseEvent me) {
         
-    }
-    
+    }  
 }

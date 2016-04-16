@@ -1,5 +1,6 @@
 package Tools;
 
+import Controler.Tool;
 import Modele.MyShape;
 import View.MainFrame;
 import java.awt.Dimension;
@@ -13,13 +14,11 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class ToolSelect extends JButton implements ActionListener, MouseListener, MouseMotionListener{
+public class ToolSelect extends JButton implements ActionListener, MouseListener, MouseMotionListener, Tool{
     private MainFrame mainFrame;
     private String status;
     
@@ -72,7 +71,6 @@ public class ToolSelect extends JButton implements ActionListener, MouseListener
         myShape.getModele().notifyObserver();
         this.xFirstClick = me.getX();
         this.yFirstClick = me.getY();
-        //System.out.println("x = " + this.xFirstClick + " y = " + this.yFirstClick);
     }
 
     @Override
@@ -94,7 +92,6 @@ public class ToolSelect extends JButton implements ActionListener, MouseListener
 
     @Override
     public void mouseDragged(MouseEvent me) {
-        System.out.println("x = " + this.xFirstClick + " y = " + this.yFirstClick);
         MyShape myShape = (MyShape)me.getSource();
         int x = myShape.getxOrigin()-this.xFirstClick+me.getX();
         myShape.setxOrigin(x);
@@ -133,7 +130,6 @@ public class ToolSelect extends JButton implements ActionListener, MouseListener
         myShape.getModele().notifyObserver();
         myShape.getModele().notifyObserver();
         myShape.getModele().notifyObserver();
-        //System.out.println(myShape.getBackground());
     }
 
     @Override
