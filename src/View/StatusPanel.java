@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
-public class StatusPanel extends JPanel{
+public class StatusPanel extends JPanel{    //barre de status
     private JLabel statusLabel;
-    private String status = new String("Select");
+    private String status = new String("Select");   //status en cours (select, fill, ...)
     
     public StatusPanel(JFrame frame) {
         this.setBorder(new BevelBorder(BevelBorder.LOWERED));
@@ -21,7 +21,7 @@ public class StatusPanel extends JPanel{
         this.add(statusLabel);
     }
 
-    public void setStatus(String status) {
+    public void setStatus(String status) {  //ajoute un nouveau status à la barre de status
         this.status = status;
         this.statusLabel.setText("[" + status + "] tool selected");
     }

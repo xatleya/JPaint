@@ -16,46 +16,46 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class ToolbarToolsPanel extends JPanel{
+public class ToolbarToolsPanel extends JPanel{  //panel des tools
     private MainFrame mainFrame;
     
     public ToolbarToolsPanel(MainFrame mainFrame)  {
-        this.setLayout(new GridLayout(5,1,4,4));
+        this.setLayout(new GridLayout(5,1,4,4));    //il s'agit d'un gridLayout
         this.setPreferredSize(new Dimension(100,530));
         this.setBorder(BorderFactory.createLineBorder(Color.black));  
         this.mainFrame = mainFrame;
         //this.addAllTools();
     }
     
-    public void addAllTools() {
+    public void addAllTools() { //ajoute tous les outils à la toolbar
         File[] files = null; 
-        File directoryToScan = new File("tools"); 
+        File directoryToScan = new File("tools");   //on scan le dossier tools pour récupérer tous les fichiers .class
         files = directoryToScan.listFiles(); 
         
         try {
             for(int i =0;i<=files.length-1;i++) {
-                this.addToll(files[i]);
+                this.addToll(files[i]); //on ajoute les tools une par une
             }
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(ToolbarToolsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) { 
+            System.out.println(ex.getMessage());
         } catch (SecurityException ex) {
-            Logger.getLogger(ToolbarToolsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
     
-    public void addToll(File file) {
-        CustomClassLoader c = new CustomClassLoader();
+    public void addToll(File file) {    //ajoute un outil à la toolbar
+        CustomClassLoader c = new CustomClassLoader();  //on charge un outils en particulier (au choix)
         Class toolClass = null;
         try {
-            toolClass = c.defineClassFromPath(file.toPath());
-            Class s = Class.forName(toolClass.getName());
-            if(Tool.class.isAssignableFrom(s)) {
-                Constructor constr = s.getConstructor(new Class[]{MainFrame.class});
-                JButton tool = (JButton) createObject(constr, new Object[]{this.mainFrame});
-                this.add(tool);
+            toolClass = c.defineClassFromPath(file.toPath());   //on récupère le .class
+            Class s = Class.forName(toolClass.getName());   //transforme le fichier .class en class lu par notre programme java
+            if(Tool.class.isAssignableFrom(s)) {    //si notre .class est un tool
+                Constructor constr = s.getConstructor(new Class[]{MainFrame.class});    //on récupère son contructeur
+                JButton tool = (JButton) createObject(constr, new Object[]{this.mainFrame});    //on le cast en JButton
+                this.add(tool);     //on ajoute le tool à la toolbar
             }
-            else {
-                throw new ToolException();
+            else {  //si le .class n'est pas un tool
+                throw new ToolException();  //on envoie une exception
             }
         }
         catch (ToolException ex) {
@@ -71,12 +71,11 @@ public class ToolbarToolsPanel extends JPanel{
         } catch (NoSuchMethodException ex) {
             System.out.println(ex.getMessage());
         }
-        System.out.println(toolClass.getName());
         this.mainFrame.revalidate();
         this.mainFrame.repaint();
     }
     
-    public void removeTool(String status) {
+    public void removeTool(String status) { //supprime un tool de la toolbar et désactive ce tool
         for(Component current : this.getComponents()) {
             try {
                 if(Class.forName("Tools.Tool" + status).isInstance(current)) {
@@ -92,7 +91,7 @@ public class ToolbarToolsPanel extends JPanel{
         }
     }
     
-    public static Object createObject(Constructor constructor, Object[] arg) {
+    public static Object createObject(Constructor constructor, Object[] arg) {  //crée un objet par son constructeur
         Object object = null;
         try {
             object = constructor.newInstance(arg);

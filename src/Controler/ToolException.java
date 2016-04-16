@@ -1,6 +1,6 @@
 package Controler;
 
-public class ToolException extends Exception{
+public class ToolException extends Exception{   //exception pour savoir si un .class est un outil ou non
     public ToolException() {
         
     }

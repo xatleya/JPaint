@@ -4,28 +4,28 @@ import java.awt.Color;
 import java.awt.Shape;
 import javax.swing.JPanel;
 
-public class MyShape extends JPanel{
+public class MyShape extends JPanel{    //une shape de notre JPaint (il s'agit d'un JPanel)
     private MainModele modele;
-    private Shape shapeBackground;
-    private Shape shapeForeground;
-    private Color foregroundColor;
-    private Color backgroundColor;
-    private String type;
-    private boolean selected = false;
+    private Shape shapeBackground;      //correspond au contour de la shape 
+    private Shape shapeForeground;      //l'interieur de la shape
+    private Color foregroundColor;      //couleur de l'interieur
+    private Color backgroundColor;      //couleur du contour
+    private String type;                //pour savoir de quel type est notre shape (ellipse, rectangle, line,...)
+    private boolean selected = false;   //savoir si notre shape est sélectionnée
     
-    private int xOrigin;
-    private int yOrigin;
+    private int xOrigin;    //position en x du JPanel associé à notre shape
+    private int yOrigin;    //position en y du JPanel associé à notre shape
     
-    public MyShape(MainModele modele, Shape shapeForeground, Shape shapeBackground, Color foregroundColor, Color backgroundColor, String type) {
+    //contructeur de MyShape
+    public MyShape(MainModele modele, Shape shapeForeground, Shape shapeBackground, Color foregroundColor, Color backgroundColor, String type) { 
         this.modele = modele;
         this.shapeForeground = shapeForeground;
         this.shapeBackground = shapeBackground;
         this.foregroundColor = foregroundColor;
         this.backgroundColor = backgroundColor;
         this.type = type;
-        //this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.setBackground(new Color(0,0,0,0));
-        this.xOrigin = (int)this.shapeForeground.getBounds2D().getX();
+        this.xOrigin = (int)this.shapeForeground.getBounds2D().getX();  //le JPanel associé à la shape aura la même position
         this.yOrigin = (int)this.shapeForeground.getBounds2D().getY();
     }
 

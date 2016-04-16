@@ -5,8 +5,8 @@ import View.MainFrame;
 public class main {
 
     public static void main(String[] args) {
-        MainModele modele = new MainModele();
-        MainFrame frame = new MainFrame(modele);
-        modele.addObserver(frame.getDrawPanel());
+        MainModele modele = new MainModele();       //on crée un modèle
+        MainFrame frame = new MainFrame(modele);    //on crée notre frame
+        modele.addObserver(frame.getDrawPanel());   //on ajoute les observers au modèle
     }  
 }

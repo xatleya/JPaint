@@ -1,5 +1,5 @@
 package Controler;
 
-public interface Tool {
+public interface Tool { //interface pour identifier un outil
     
 }
