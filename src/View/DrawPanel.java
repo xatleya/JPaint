@@ -27,7 +27,6 @@ public class DrawPanel extends JPanel implements Observer{
         this.setLayout(null);
         this.setBackground(Color.white);
         this.setBorder(BorderFactory.createLineBorder(Color.black));
-        //this.addMouseListener(new SelectDrawPanelListener());  //par default mode select
         
         this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "delete");
         this.getActionMap().put("delete", new AbstractAction() {
@@ -54,15 +53,13 @@ public class DrawPanel extends JPanel implements Observer{
         int i = this.modele.getShapesTab().size()-1;
         while(i!=-1) {
             MyShape current = this.modele.getShapesTab().get(i);
-            if(current.getType().equals("Ellipse") || current.getType().equals("Rectangle")) {
+            if(!current.getType().equals("Line_D") || !current.getType().equals("Line_M")) {
                 if(current.isSelected()) {
-                    //current.setBorder(BorderFactory.createLineBorder(Color.black));
                     current.setLocation(new Point(current.getxOrigin(), current.getyOrigin()));
                     current.setBackground(new Color(0,0,0,0));
                 }
                 else {
                     this.remove(current);
-                    //current.setBorder(null);
                     current.setBounds(current.getxOrigin(), current.getyOrigin(), (int)current.getShapeForeground().getBounds2D().getWidth(), (int)current.getShapeForeground().getBounds2D().getHeight());
                     this.add(current);
                 }
@@ -73,13 +70,12 @@ public class DrawPanel extends JPanel implements Observer{
         i=this.modele.getShapesTab().size()-1;
         while(i!=-1) {
             MyShape current = this.modele.getShapesTab().get(i);
-            if(current.getType().equals("Line")) {
+            if(current.getType().equals("Line_D") || current.getType().equals("Line_M")) {
                 if(current.isSelected()) {
                     current.setLocation(new Point(current.getxOrigin(), current.getyOrigin()));
                     current.setBackground(new Color(0,0,0,0));
                 }
                 else {
-                    //current.setBorder(null);
                     current.setBounds(current.getxOrigin(), current.getyOrigin(), (int)current.getShapeForeground().getBounds2D().getWidth(), (int)current.getShapeForeground().getBounds2D().getHeight());
                     this.add(current);
                 }

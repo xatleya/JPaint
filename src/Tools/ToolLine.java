@@ -20,8 +20,9 @@ public class ToolLine extends JButton implements ActionListener, MouseListener, 
     private MainFrame mainFrame;
     private String status;
     
-    private int xOrigin;
-    private int yOrigin;
+    private int xOrigin, xEnd;
+    private int yOrigin, yEnd;
+    private String name;
     
     public ToolLine(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -61,10 +62,23 @@ public class ToolLine extends JButton implements ActionListener, MouseListener, 
 
     @Override
     public void mouseReleased(MouseEvent me) {
+       this.xEnd = me.getX();
+       this.yEnd = me.getY();
+       this.name ="Line_M";
+       if(xEnd>=xOrigin){
+           if(yEnd>=yOrigin){
+               this.name ="Line_D";
+           }
+       }
+       if(xEnd<=xOrigin){
+           if(yEnd<=yOrigin){
+               this.name ="Line_D";
+           }
+       }
        DrawPanel drawPanel = (DrawPanel)me.getSource();
-       Shape shapeForeground = new Line2D.Float(this.xOrigin,this.yOrigin,me.getX(),me.getY());
+       Shape shapeForeground = new Line2D.Float(this.xOrigin,this.yOrigin,this.xEnd,this.yEnd);
        Color foregroundColor = drawPanel.getMainFrame().getToolbar().getToolbarColorChoserPanel().getForegroundButton().getBackground();
-       MyShape line = new MyShape(drawPanel.getModele(), shapeForeground, null, foregroundColor, null, new String("Line"));
+       MyShape line = new MyShape(drawPanel.getModele(), shapeForeground, null, foregroundColor, null, name);
        drawPanel.getModele().getShapesTab().add(line);
        drawPanel.getModele().notifyObserver();
     }

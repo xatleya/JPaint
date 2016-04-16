@@ -108,14 +108,21 @@ public class ToolSelect extends JButton implements ActionListener, MouseListener
             shapeBackground = new Rectangle2D.Float(x,y,(int)myShape.getShapeBackground().getBounds2D().getWidth(),(int)myShape.getShapeBackground().getBounds2D().getHeight());
             shapeForeground = new Rectangle2D.Float(x+2,y+2,(int)myShape.getShapeBackground().getBounds2D().getWidth()-4,(int)myShape.getShapeBackground().getBounds2D().getHeight()-4);
         }
-        else if(myShape.getType().equalsIgnoreCase("Line")){
+        else if(myShape.getType().equalsIgnoreCase("Line_D") || myShape.getType().equalsIgnoreCase("Line_M")){
             Line2D temp = (Line2D) myShape.getShapeForeground();
             shapeBackground = null;
             Double diffx =Math.abs(temp.getX1()-temp.getX2())/2;
             Double diffy =Math.abs(temp.getY1()-temp.getY2())/2;
             Double x2=x+diffx;
             Double y2=y+diffy;
-            shapeForeground = new Line2D.Double(x2+diffx,y2+diffy,x2-diffx,y2-diffy);
+            //descendant
+            if(myShape.getType().equalsIgnoreCase("Line_M")){
+                shapeForeground = new Line2D.Double(x2-diffx,y2+diffy,x2+diffx,y2-diffy);
+            }
+            //montant
+            else{
+                shapeForeground = new Line2D.Double(x2-diffx,y2-diffy,x2+diffx,y2+diffy);
+            }
         }
         else {
             shapeBackground = null;
