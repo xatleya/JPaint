@@ -1,2 +1,2 @@
 # JPaint
-Yolo
+A paint software in java
